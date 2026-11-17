@@ -26,3 +26,8 @@ Thumbs.db
 
 # Test cache
 .pytest_cache/
+# Large KAIST research datasets - retain locally, exclude from GitHub
+dataset/kaist/DoS_dataset.csv
+dataset/kaist/Fuzzy_dataset.csv
+dataset/kaist/gear_dataset.csv
+dataset/kaist/RPM_dataset.csv
