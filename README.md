@@ -43,7 +43,8 @@ The diagram is a conceptual system view. The executable Python project currently
 | `evaluation/hybrid_eval.py` | Evaluates the generated hybrid dataset through the gateway |
 | `evaluation/kaist_eval.py` | Evaluates KAIST dataset CSV files through the gateway |
 | `tests/` | Unit and integration tests |
-| `dashboard3.py` | Flask-based animated network dashboard |
+| `main.py` | Application entry point; starts the simulation thread and launches the Flask server |
+| `dashboard3.py` | Flask application, dashboard routes, simulation loop, and dashboard interface |
 
 ## Security mechanisms represented
 
@@ -91,8 +92,8 @@ SecureEV/
 │   ├── obc_ecu.py
 │   └── tcu.py
 ├── tests/
-├── dashboard3.py
-├── main.py
+├── main.py                 # Application startup entry point
+├── dashboard3.py           # Flask dashboard and simulation logic
 ├── requirements.txt
 └── README.md
 ```
@@ -134,19 +135,30 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-## Run the dashboard
+## Run SecureEV
 
-The repository keeps **only `dashboard3.py`** as its dashboard entry point.
+`main.py` is the primary application entry point. It imports the Flask application and simulation loop from `dashboard3.py`, starts the simulation in a background thread, and launches the Flask development server.
+
+From the repository root, activate the virtual environment and run:
 
 ```bash
-python dashboard3.py
+python main.py
 ```
 
-Open the URL printed by Flask. The current dashboard source configures port **5002**, so the local address is:
+The application starts the dashboard server on port **5002**. Open the following address in your browser:
 
 ```text
 http://localhost:5002
 ```
+
+### Application startup flow
+
+1. `main.py` imports `app`, `sim_loop`, and `REAL` from `dashboard3.py`.
+2. It reports whether the dashboard is using the real project modules or the mock-simulation fallback.
+3. It starts `sim_loop()` in a daemon background thread.
+4. It runs the Flask application with threaded request handling and debugging disabled.
+
+`dashboard3.py` retains the dashboard routes, interface, and simulation implementation. It is not necessary to run `dashboard3.py` directly for the normal application workflow; use `python main.py`.
 
 The dashboard attempts to import and run the project modules. If those imports are unavailable, its source contains a mock-simulation fallback.
 
