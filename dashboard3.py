@@ -1,10 +1,4 @@
-"""
-SecureEV Animated Network Dashboard v3
-Copy to your secureev project root and run:
-    pip install flask
-    python3 dashboard3.py
-Open: http://localhost:5002
-"""
+
 
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -593,13 +587,13 @@ es.onmessage=e=>{
 </html>"""
 # HTML_END
 
-if __name__ == '__main__':
-    mode = "real modules" if REAL else "mock simulation"
-    print(f"\n SecureEV Network Dashboard v3 — {mode}")
-    print(f" Open: http://localhost:5002\n")
-    t = threading.Thread(target=sim_loop, daemon=True)
-    t.start()
-    app.run(debug=False, threaded=True, port=5002)
+# if __name__ == '__main__':
+#     mode = "real modules" if REAL else "mock simulation"
+#     print(f"\n SecureEV Network Dashboard v3 — {mode}")
+#     print(f" Open: http://localhost:5002\n")
+#     t = threading.Thread(target=sim_loop, daemon=True)
+#     t.start()
+#     app.run(debug=False, threaded=True, port=5002)
 
 # """
 # SecureEV Animated Network Dashboard v3
