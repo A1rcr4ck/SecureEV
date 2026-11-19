@@ -218,6 +218,4 @@ Large research datasets should not be committed to ordinary Git if they exceed G
 - The MAC truncation, simulated key material, and other prototype shortcuts must be reviewed before any real-world deployment.
 - Evaluation results depend on the exact dataset files, configuration, and scripts used. Record those details when reporting results.
 
-## License
 
-Add the project's chosen license here before redistributing the repository.
